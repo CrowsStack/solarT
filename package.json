@@ -11,7 +11,10 @@
   "dependencies": {
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "next": "15.0.3",
+    "framer-motion": "^10.16.4",
+    "react-intersection-observer": "^9.5.3",
+    "embla-carousel-react": "^8.0.0-rc17"
   },
   "devDependencies": {
     "typescript": "^5",
