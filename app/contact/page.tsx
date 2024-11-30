@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import { COMPANY } from '../constants/company';
+import { PhoneIcon, EmailIcon, LocationIcon } from '../components/icons';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -41,24 +43,29 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center">
-              <div className="text-3xl mb-4">📞</div>
+              <div className="text-3xl mb-4 text-blue-600">
+                <PhoneIcon />
+              </div>
               <h3 className="text-xl font-semibold mb-2">Phone</h3>
-              <p className="text-gray-600">+234 123 456 7890</p>
+              <p className="text-gray-600">{COMPANY.CONTACT.PHONE}</p>
               <p className="text-gray-600">Mon-Fri 9am-5pm</p>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center">
-              <div className="text-3xl mb-4">✉️</div>
+              <div className="text-3xl mb-4 text-blue-600">
+                <EmailIcon />
+              </div>
               <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <p className="text-gray-600">info@solartech.com</p>
-              <p className="text-gray-600">support@solartech.com</p>
+              <p className="text-gray-600">{COMPANY.CONTACT.EMAIL.INFO}</p>
+              <p className="text-gray-600">{COMPANY.CONTACT.EMAIL.SUPPORT}</p>
             </div>
 
             <div className="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center">
-              <div className="text-3xl mb-4">📍</div>
+              <div className="text-3xl mb-4 text-blue-600">
+                <LocationIcon />
+              </div>
               <h3 className="text-xl font-semibold mb-2">Location</h3>
-              <p className="text-gray-600">123 Solar Street</p>
-              <p className="text-gray-600">Lagos, Nigeria</p>
+              <p className="text-gray-600">{COMPANY.CONTACT.ADDRESS}</p>
             </div>
           </div>
 

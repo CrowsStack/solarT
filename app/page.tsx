@@ -7,6 +7,14 @@ import { useInView } from "react-intersection-observer";
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from "react";
 import HeroCarousel from './components/HeroCarousel';
+import ServicesCarousel from './components/ServicesCarousel';
+import StatsSection from './components/StatsSection';
+import { COMPANY } from './constants/company';
+import { 
+  SolarIcon, 
+  CameraIcon, 
+  FireAlarmIcon 
+} from './components/icons';
 
 export default function Home() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -70,62 +78,11 @@ export default function Home() {
     <main className="min-h-screen">
       <HeroCarousel />
 
-      {/* Services Section */}
-      <motion.section 
-        ref={servicesRef}
-        className="py-20 bg-gray-50"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600">
-              Comprehensive solutions for your energy and security needs
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "Solar Installation",
-                description: "Harness clean, renewable energy with our professional solar installations",
-                icon: "⚡",
-              },
-              {
-                title: "CCTV & Security",
-                description: "Advanced surveillance systems for complete peace of mind",
-                icon: "🎥",
-              },
-              {
-                title: "Electric Fencing",
-                description: "Secure perimeter protection for your property",
-                icon: "🔒",
-              },
-              {
-                title: "Fire Detection",
-                description: "Early warning systems to protect life and property",
-                icon: "🔥",
-              },
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={servicesInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
+      {/* Service Cards Section */}
+      <ServicesCarousel />
+
+      {/* Stats Section */}
+      <StatsSection />
 
       {/* CTA Section */}
       <motion.section 
@@ -137,7 +94,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-8">
-            Contact us today for a free consultation and quote
+            Contact {COMPANY.FULL_NAME} today for a free consultation and quote
           </p>
           <Link 
             href="/contact" 
@@ -149,13 +106,13 @@ export default function Home() {
       </motion.section>
 
       {/* Video Carousel Section */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl font-bold text-white text-center mb-12"
+            className="text-3xl font-bold text-blue-900 text-center mb-12"
           >
             Our Recent Projects
           </motion.h2>
@@ -177,7 +134,7 @@ export default function Home() {
                           className="absolute inset-0"
                         />
                       </div>
-                      <h3 className="text-white text-xl mt-4 text-center">{video.title}</h3>
+                      <h3 className="text-blue-900 text-xl mt-4 text-center">{video.title}</h3>
                     </div>
                   </div>
                 ))}
@@ -185,13 +142,13 @@ export default function Home() {
             </div>
             
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-blue-900 p-3 rounded-full z-10"
               onClick={scrollPrev}
             >
               ←
             </button>
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-blue-900 p-3 rounded-full z-10"
               onClick={scrollNext}
             >
               →
@@ -203,7 +160,7 @@ export default function Home() {
               <button
                 key={index}
                 className={`w-3 h-3 rounded-full ${
-                  index === selectedIndex ? 'bg-white' : 'bg-white/30'
+                  index === selectedIndex ? 'bg-blue-900' : 'bg-blue-100'
                 }`}
                 onClick={() => emblaApi?.scrollTo(index)}
               />

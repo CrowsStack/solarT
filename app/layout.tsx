@@ -4,12 +4,13 @@ import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Background from './components/Background'
+import { COMPANY } from './constants/company'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'SolarTech Solutions',
-  description: 'Professional Solar, CCTV, Intercom, and Security Systems Installation',
+  title: `${COMPANY.SHORT_NAME} - Solar & Security Solutions`,
+  description: `${COMPANY.FULL_NAME} - Professional Solar, CCTV, Intercom, and Security Systems Installation`,
 }
 
 export default function RootLayout({

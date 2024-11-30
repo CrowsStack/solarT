@@ -4,61 +4,81 @@ import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+const NavigationButton = ({ direction, onClick, disabled }: { direction: 'left' | 'right', onClick: () => void, disabled: boolean }) => (
+  <button
+    onClick={onClick}
+    className={`absolute ${direction === 'left' ? 'left-4 lg:left-8' : 'right-4 lg:right-8'} top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all ${
+      disabled && 'opacity-50 cursor-not-allowed'
+    }`}
+    disabled={disabled}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2.5}
+      stroke="currentColor"
+      className="w-6 h-6 text-white"
+    >
+      {direction === 'left' ? (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      ) : (
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      )}
+    </svg>
+  </button>
+);
+
 const slides = [
   {
-    title: "Solar Energy Solutions",
-    description: "Harness the power of the sun with our state-of-the-art solar panel installations. We provide complete solar solutions that reduce your carbon footprint and energy bills. Our expert team handles everything from design to installation, ensuring maximum efficiency for your property.",
-    image: "/images/solar-panel.jpg",
-    color: "from-amber-500 to-orange-600"
+    title: "Solar Installation",
+    description: "Harness clean, renewable energy with our professional solar installations",
+    image: "/home/solar-panel.jpg",
+    link: "/services",
   },
   {
-    title: "Smart Security Systems",
-    description: "Protect what matters most with our advanced security solutions. We integrate cutting-edge cameras, smart sensors, and 24/7 monitoring systems to keep your property secure. Experience peace of mind with our comprehensive security installations.",
-    image: "/images/security.jpg",
-    color: "from-blue-600 to-blue-800"
+    title: "CCTV & Security",
+    description: "Advanced surveillance systems for complete peace of mind",
+    image: "/home/cctv.jpg",
+    link: "/services",
   },
   {
-    title: "Electrical Excellence",
-    description: "From basic electrical work to complex installations, our certified electricians deliver reliable and safe solutions. We specialize in modern electrical systems that power your home or business efficiently while meeting all safety standards.",
-    image: "/images/electrical.jpg",
-    color: "from-gray-700 to-gray-900"
+    title: "Security Solutions",
+    description: "Comprehensive security solutions for your property",
+    image: "/home/security.jpg",
+    link: "/services",
   },
-  {
-    title: "Energy Management",
-    description: "Take control of your energy consumption with our smart energy management systems. Monitor and optimize your power usage in real-time, leading to significant cost savings and improved energy efficiency.",
-    image: "/images/energy-management.jpg",
-    color: "from-green-500 to-green-700"
-  },
-  {
-    title: "Sustainable Solutions",
-    description: "Join the green revolution with our eco-friendly energy solutions. We help you reduce your environmental impact while saving money through sustainable technology implementations and energy-efficient upgrades.",
-    image: "/images/sustainable.jpg",
-    color: "from-teal-500 to-teal-700"
-  },
-  {
-    title: "Expert Consultation",
-    description: "Our team of experts provides personalized consultations to understand your needs and design the perfect solution. We work with you every step of the way, from initial planning to final installation and maintenance.",
-    image: "/images/consultation.jpg",
-    color: "from-purple-600 to-purple-800"
-  }
 ];
 
 export default function HeroCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
   );
 
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
+    
     onSelect();
     emblaApi.on('select', onSelect);
     
@@ -99,6 +119,10 @@ export default function HeroCarousel() {
         </div>
       </div>
 
+      {/* Navigation Controls */}
+      <NavigationButton direction="left" onClick={scrollPrev} disabled={!canScrollPrev} />
+      <NavigationButton direction="right" onClick={scrollNext} disabled={!canScrollNext} />
+
       {/* Carousel container */}
       <div className="overflow-hidden h-full" ref={emblaRef}>
         <div className="flex h-full">
@@ -117,7 +141,7 @@ export default function HeroCarousel() {
                   priority={index === 0}
                 />
               </div>
-              <div className={`absolute inset-0 bg-gradient-to-r ${slide.color} opacity-60`} />
+              <div className={`absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-60`} />
               <div className="absolute inset-0 bg-black/40" />
               <div className="relative h-full flex items-center justify-center p-8">
                 <div className="max-w-4xl text-white text-center">
