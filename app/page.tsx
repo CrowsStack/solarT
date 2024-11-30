@@ -30,19 +30,34 @@ export default function Home() {
 
   const projectVideos = [
     {
-      title: "Solar Installation Project",
-      url: "/videos/solar-installation.mp4",
-      thumbnail: "/images/solar-thumb.jpg"
+      title: "How to Install Solar Panels - Complete Guide",
+      videoId: "2Apa2WcG9z0",
+      thumbnail: "https://img.youtube.com/vi/2Apa2WcG9z0/maxresdefault.jpg"
     },
     {
-      title: "CCTV System Setup",
-      url: "/videos/cctv-setup.mp4",
-      thumbnail: "/images/cctv-thumb.jpg"
+      title: "Total Cost of Off-Grid Solar Setup (Tagalog)",
+      videoId: "5WNgHh1wJPY",
+      thumbnail: "https://img.youtube.com/vi/5WNgHh1wJPY/maxresdefault.jpg"
     },
     {
-      title: "Electric Fence Installation",
-      url: "/videos/fence-install.mp4",
-      thumbnail: "/images/fence-thumb.jpg"
+      title: "Tesla Solar Roof Review: Was it Worth It?",
+      videoId: "UJeSWbR6W04",
+      thumbnail: "https://img.youtube.com/vi/UJeSWbR6W04/maxresdefault.jpg"
+    },
+    {
+      title: "Budget-Friendly Solar Generator Setup",
+      videoId: "ecRZTtVM1Eg",
+      thumbnail: "https://img.youtube.com/vi/ecRZTtVM1Eg/maxresdefault.jpg"
+    },
+    {
+      title: "Smart Security System Overview",
+      videoId: "8E6Kx_CN9C0",
+      thumbnail: "https://img.youtube.com/vi/8E6Kx_CN9C0/maxresdefault.jpg"
+    },
+    {
+      title: "Home Energy Management Solutions",
+      videoId: "qnW6ZRdJIHo",
+      thumbnail: "https://img.youtube.com/vi/qnW6ZRdJIHo/maxresdefault.jpg"
     }
   ];
 
@@ -54,65 +69,6 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroCarousel />
-
-      {/* Video Carousel Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl font-bold text-white text-center mb-12"
-          >
-            Our Recent Projects
-          </motion.h2>
-          
-          <div className="relative">
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex">
-                {projectVideos.map((video, index) => (
-                  <div key={index} className="flex-[0_0_100%] min-w-0 relative">
-                    <div className="mx-4">
-                      <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
-                        {/* Replace with actual video implementation */}
-                        <div className="w-full h-full bg-gray-700 flex items-center justify-center">
-                          <span className="text-white">Video {index + 1}</span>
-                        </div>
-                      </div>
-                      <h3 className="text-white text-xl mt-4">{video.title}</h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full"
-              onClick={scrollPrev}
-            >
-              ←
-            </button>
-            <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full"
-              onClick={scrollNext}
-            >
-              →
-            </button>
-          </div>
-          
-          <div className="flex justify-center gap-2 mt-4">
-            {projectVideos.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full ${
-                  index === selectedIndex ? 'bg-white' : 'bg-white/30'
-                }`}
-                onClick={() => emblaApi?.scrollTo(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <motion.section 
@@ -191,6 +147,70 @@ export default function Home() {
           </Link>
         </div>
       </motion.section>
+
+      {/* Video Carousel Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-bold text-white text-center mb-12"
+          >
+            Our Recent Projects
+          </motion.h2>
+          
+          <div className="relative">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex">
+                {projectVideos.map((video, index) => (
+                  <div key={index} className="flex-[0_0_100%] min-w-0 relative">
+                    <div className="mx-4">
+                      <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
+                          title={video.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="absolute inset-0"
+                        />
+                      </div>
+                      <h3 className="text-white text-xl mt-4 text-center">{video.title}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full z-10"
+              onClick={scrollPrev}
+            >
+              ←
+            </button>
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full z-10"
+              onClick={scrollNext}
+            >
+              →
+            </button>
+          </div>
+          
+          <div className="flex justify-center gap-2 mt-4">
+            {projectVideos.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  index === selectedIndex ? 'bg-white' : 'bg-white/30'
+                }`}
+                onClick={() => emblaApi?.scrollTo(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

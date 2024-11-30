@@ -2,6 +2,7 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const slides = [
   {
@@ -106,7 +107,17 @@ export default function HeroCarousel() {
               key={index}
               className="flex-[0_0_100%] min-w-0 relative h-full"
             >
-              <div className={`absolute inset-0 bg-gradient-to-r ${slide.color} opacity-90`} />
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority={index === 0}
+                />
+              </div>
+              <div className={`absolute inset-0 bg-gradient-to-r ${slide.color} opacity-60`} />
               <div className="absolute inset-0 bg-black/40" />
               <div className="relative h-full flex items-center justify-center p-8">
                 <div className="max-w-4xl text-white text-center">

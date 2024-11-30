@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
+import ShortsCarousel from '../components/ShortsCarousel';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -132,6 +133,18 @@ export default function Projects() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Shorts Carousel Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-white text-center mb-16">
+            Quick Installation Guides
+          </h2>
+          <div className="relative pb-12">
+            <ShortsCarousel />
           </div>
         </div>
       </section>
