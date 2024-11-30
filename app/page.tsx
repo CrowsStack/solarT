@@ -1,10 +1,12 @@
 'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from "react";
+import HeroCarousel from './components/HeroCarousel';
 
 export default function Home() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -44,67 +46,14 @@ export default function Home() {
     }
   ];
 
-  const [heroRef, heroInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
-
   const [servicesRef, servicesInView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <motion.section 
-        ref={heroRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={heroInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center md:text-left md:w-1/2">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              Power Your Future with Smart Energy Solutions
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl mb-8"
-            >
-              Professional installation services for solar, security, and electrical systems. 
-              Transform your property with cutting-edge technology.
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="space-x-4"
-            >
-              <Link 
-                href="/quote" 
-                className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Get Free Quote
-              </Link>
-              <Link 
-                href="/services" 
-                className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
-              >
-                Our Services
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+    <main className="min-h-screen">
+      <HeroCarousel />
 
       {/* Video Carousel Section */}
       <section className="py-20 bg-gray-900">
@@ -242,6 +191,6 @@ export default function Home() {
           </Link>
         </div>
       </motion.section>
-    </div>
+    </main>
   );
 }
